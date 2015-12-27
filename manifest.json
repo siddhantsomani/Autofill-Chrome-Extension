@@ -10,8 +10,13 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
+	"content_scripts": [ {
+	        "js": [ "content_script.js"  ],
+	        "matches": [ "https://academics.vit.ac.in/student/stud_login.asp" ]    
+	    } ],
 	"permissions": [
 		"storage",
-		"tabs"
-	]
+		"tabs",
+		"<all_urls>"
+		]
 }

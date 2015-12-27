@@ -5,9 +5,10 @@ function saveDetails() {
 		chrome.storage.sync.set({'username':username},function (){
 			console.log("username set");
 		});
-		chrome.storage.sync.set({'password':username},function (){
+		chrome.storage.sync.set({'password':password},function (){
 			console.log("password set");
 		});
+		document.getElementById("errorDisplay").innerHTML = "Values Are Set!<br>Submit new values to change";
 	}
 }
 
@@ -18,13 +19,25 @@ function ifSet() {
 		if(items.username)
 			username = items.username;
 		chrome.storage.sync.get('password', function (items){
-		password = items.password;
-		if(username && password)
-			document.getElementById("errorDisplay").innerHTML = "Values Are Set!<br>Submit new values to change";
-	});
-});
+			password = items.password;
+			if(username && password)
+				{
+					document.getElementById("errorDisplay").innerHTML = "Values Are Set!<br>Submit new values to change";
+				}
+			});
+		});
 	
 }
 
+function resetDetails(){
+	chrome.storage.sync.set({'username':""},function (){
+		console.log("username reset");
+	});
+	chrome.storage.sync.set({'password':""},function (){
+		console.log("password reset");
+	});
+	document.getElementById("errorDisplay").innerHTML = "";
+}
+
  document.getElementById('saveDetails').addEventListener("click", saveDetails);
- document.getElementById('body').addEventListener("load", ifSet);
+ document.getElementById('bodyTag').addEventListener("load", ifSet);
